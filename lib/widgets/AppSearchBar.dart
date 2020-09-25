@@ -21,7 +21,7 @@ class AppSearchBar extends SearchDelegate<String> {
   Widget buildLeading(BuildContext context) {
     return IconButton(
       icon: AnimatedIcon(
-          icon: AnimatedIcons.arrow_menu, progress: transitionAnimation),
+          icon: AnimatedIcons.menu_arrow, progress: transitionAnimation),
       onPressed: () {
         query = "";
         close(context, null);
@@ -36,13 +36,16 @@ class AppSearchBar extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final results = recentSearch;
+    final results = query.isEmpty ? recentSearch : products;
     return ListView.builder(
       itemCount: results.length,
       itemBuilder: (context, index) {
         return ListTile(
           leading: Icon(Icons.youtube_searched_for),
           title: Text(results[index]),
+          onTap: () {
+            print(results[index]);
+          },
         );
       },
     );
